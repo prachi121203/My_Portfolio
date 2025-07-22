@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Professional Portfolio</title>
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif, Arial, sans-serif;
+      line-height: 1.6;
+      background: #f9fafb;
+      color: #111827;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #059669; /* Emerald green */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #065f46;
+      outline: none;
+    }
+    h1, h2, h3, h4 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #065f46;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      color: #374151;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+
+    /* Layout */
+    header {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 12px rgb(0 0 0 / 0.1);
+      padding: 16px 32px;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      user-select: none;
+      cursor: default;
+      text-shadow: 0 0 8px rgba(255 255 255 / 0.3);
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    nav a:hover, nav a:focus {
+      background: rgba(255 255 255 / 0.15);
+    }
+
+    /* Mobile menu */
+    .mobile-menu-button {
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 2.2rem;
+      user-select: none;
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        position: absolute;
+        top: 64px;
+        right: 0;
+        background: #059669;
+        flex-direction: column;
+        width: 220px;
+        border-radius: 0 0 0 12px;
+        box-shadow: 0 8px 16px rgb(0 0 0 / 0.2);
+      }
+      nav.show {
+        display: flex;
+      }
+      .mobile-menu-button {
+        display: block;
+      }
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 1200px;
+      margin: 32px auto 48px;
+      padding: 0 24px;
+      width: 100%;
+      min-height: calc(100vh - 160px);
+    }
+
+    /* Home Section */
+    #home {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 96px;
+      scroll-margin-top: 96px;
+    }
+    #home img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(5, 150, 105, 0.3);
+    }
+    #home-text {
+      max-width: 600px;
+    }
+    #home-text h1 {
+      font-size: 3.5rem;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+    }
+    #home-text p {
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      color: #374151;
+    }
+    #home-text .btn {
+      background: #059669;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 5px 15px rgba(5,150,105,0.3);
+    }
+    #home-text .btn:hover, #home-text .btn:focus {
+      background: #065f46;
+      outline: none;
+      box-shadow: 0 7px 20px rgba(6,95,70,0.7);
+    }
+    @media (max-width: 900px) {
+      #home {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+      #home img {
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #home-text {
+        max-width: 100%;
+      }
+    }
+
+    /* Section Titles */
+    section h2.section-title {
+      font-size: 2.75rem;
+      margin-bottom: 48px;
+      text-align: center;
+      color: #059669;
+      user-select: none;
+      letter-spacing: 0.03em;
+    }
+
+    /* Projects Gallery */
+    #projects .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+    .project-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgb(5 150 105 / 0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .project-card:hover, .project-card:focus-within {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 40px rgb(5 150 105 / 0.25);
+      outline: none;
+      cursor: pointer;
+    }
+    .project-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center center;
+      transition: transform 0.4s ease;
+    }
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+    .project-content {
+      padding: 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #065f46;
+    }
+    .project-desc {
+      flex-grow: 1;
+      color: #4b5563;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    .project-links {
+      display: flex;
+      gap: 16px;
+    }
+    .project-links a {
+      color: #059669;
+      font-weight: 600;
+      border: 2px solid #059669;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .project-links a:hover, .project-links a:focus {
+      background-color: #059669;
+      color: white;
+      outline: none;
+    }
+
+    /* Resume Section */
+    #resume {
+      max-width: 800px;
+      margin: 0 auto 96px;
+      scroll-margin-top: 96px;
+    }
+    #resume h3 {
+      font-size: 1.75rem;
+      color: #065f46;
+      margin-bottom: 16px;
+    }
+    #resume p {
+      color: #4b5563;
+    }
+    #resume ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 24px;
+      color: #4b5563;
+    }
+    #resume .section-block {
+      margin-bottom: 48px;
+      user-select: none;
+    }
+    #resume .resume-link {
+      display: inline-block;
+      margin-top: 16px;
+      background: #059669;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(5,150,105,0.3);
+      transition: background-color 0.3s ease;
+    }
+    #resume .resume-link:hover,
+    #resume .resume-link:focus {
+      background: #065f46;
+      outline: none;
+      box-shadow: 0 7px 20px rgba(6,95,70,0.7);
+    }
+
+    /* Contact Section */
+    #contact {
+      max-width: 600px;
+      margin: 0 auto 96px;
+      scroll-margin-top: 96px;
+    }
+    #contact form {
+      background: white;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgb(5 150 105 / 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      user-select: none;
+    }
+    #contact label {
+      font-weight: 700;
+      color: #065f46;
+      font-size: 1rem;
+    }
+    #contact input,
+    #contact textarea {
+      padding: 14px 20px;
+      border: 2px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      outline: none;
+      border-color: #059669;
+      box-shadow: 0 0 8px #10b981aa;
+    }
+    #contact textarea {
+      min-height: 120px;
+      max-height: 240px;
+    }
+    #contact button {
+      align-self: flex-start;
+      background: #059669;
+      color: white;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 16px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(5,150,105,0.4);
+      transition: background-color 0.3s ease;
+    }
+    #contact button:hover, #contact button:focus {
+      background: #065f46;
+      outline: none;
+      box-shadow: 0 8px 24px rgba(6,95,70,0.7);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      background: #e6f4ea;
+      user-select: none;
+      border-top: 1px solid #d1d5db;
+    }
+
+    /* Scroll Reveal Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo" aria-label="Portfolio Logo">Portfolio</div>
+      <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="material-icons">menu</span>
+      </button>
+      <nav id="primary-navigation" role="navigation" aria-label="Primary navigation">
+        <a href="#home"><span class="material-icons" aria-hidden="true" style="font-size:20px;">home</span> Home</a>
+        <a href="#projects"><span class="material-icons" aria-hidden="true" style="font-size:20px;">dashboard</span> Projects</a>
+        <a href="#resume"><span class="material-icons" aria-hidden="true" style="font-size:20px;">file_present</span> Resume</a>
+        <a href="#contact"><span class="material-icons" aria-hidden="true" style="font-size:20px;">mail</span> Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" tabindex="-1" aria-label="Introduction">
+      <img src="Prachi.jpeg" alt="Prachi Kumari" />
+      <div id="home-text">
+        <h1>PRACHI KUMARI</h1>
+        <p>Hello! I am a highly motivated and detail-oriented Full Stack Web Developer with a solid foundation in both front-end and back-end technologies. I specialize in creating dynamic, user-friendly, and responsive web applications using modern frameworks and tools such as JavaScript, React.js, Node.js, Express.js, HTML, CSS, and databases like MongoDB and MySQL. Passionate about writing clean, efficient code and solving complex problems, I am eager to contribute my skills and grow within a dynamic, growth-driven organization.</p>
+        <a href="#projects" class="btn">View Projects</a>
+      </div>
+    </section>
+
+    <section id="projects" aria-label="Projects showcase">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card" tabindex="0">
+          <div class="project-image">
+            <img src="https://raw.githubusercontent.com/prachi121203/BlockBallot-Using-Blockchain/main/Screenshot/Frontpage.jpg" alt="BlockBallot-Using-Blockchain" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">BlockBallot App</h3>
+            <p class="project-desc">BlockBallot is a blockchain-powered voting system designed to deliver secure, transparent, and tamper-proof elections. The platform features an easy-to-use interface for voters and robust administrative tools for election management, ensuring integrity and trust in the voting process.</p>
+            <div class="project-links">
+              <a href="Video.mp4" aria-label="Voting app live demo"><span class="material-icons" aria-hidden="true">launch</span> Live</a>
+              <a href="https://github.com/prachi121203/BlockBallot-Using-Blockchain" aria-label="View finance app source code"><span class="material-icons" aria-hidden="true">code</span> Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0">
+          <div class="project-image">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/277d071a-9b6a-44b3-9b56-4791ba598139.png" alt="Travelling Website" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Travelling Website</h3>
+            <p class="project-desc">Wanderlust is a travel website that offers beautiful pictures, helpful guides, and easy booking options to help users plan their perfect trips.</p>
+            <div class="project-links">
+              <a href="Wandarlust Website.mp4" aria-label="Travelling website live demo"><span class="material-icons" aria-hidden="true">launch</span> Live</a>
+              <a href="https://github.com/prachi121203/Wanderlust-Project" aria-label="Travelling website source code"><span class="material-icons" aria-hidden="true">code</span> Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0">
+          <div class="project-image">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0208eb3e-877c-4770-b1e0-d22a63b87e1b.png" alt="Portfolio gallery showcasing artworks and photography thumbnails" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Creative Portfolio</h3>
+            <p class="project-desc">A visually stunning portfolio design for artists and photographers with dynamic grid layout, animations, and user-friendly navigation.</p>
+            <div class="project-links">
+              <a href="Portfolio Website.mp4" aria-label="View creative portfolio live demo"><span class="material-icons" aria-hidden="true">launch</span> Live</a>
+              <a href="#" aria-label="View creative portfolio source code"><span class="material-icons" aria-hidden="true">code</span> Code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="resume" aria-label="Resume and experience">
+      <h2 class="section-title">Resume</h2>
+      <div class="section-block">
+        <h3>Education</h3>
+        <p><strong>Bachelor of Engineering in Computer Science & Engineering</strong> — MVJ College of Engineering, 2021 – 2025</p>
+        <ul>
+          <li>Undergraduated, CGPA 8.68</li>
+          <li>Relevant Coursework: Data Structures, Algorithms, Web Development</li>
+        </ul>
+      </div>
+      <div class="section-block">
+        <h3>Work Experience</h3>
+        <p><strong>Full Stack Web Developer Intern</strong> at Take It Smart (OPC) Pvt. Ltd, 2024 – 2025</p>
+        <ul>
+          <li>Developed and maintained multiple web applications with React and Node.js</li>
+          <li>Collaborated with designers and backend teams to deliver end-to-end features</li>
+        </ul>
+      </div>
+      <div class="section-block">
+        <h3>Skills</h3>
+        <ul>
+          <li>Java, Python</li>
+          <li>JavaScript, React, Node.js, Express.js</li>
+          <li>HTML5, CSS3, Tailwind CSS</li>
+          <li>REST APIs, Git, Docker, GitHub</li>
+          <li>MySQL, MongoDB</li>
+        </ul>
+      </div>
+      <a href="Prachi Kumari.pdf" target="_blank" rel="noopener noreferrer" class="resume-link" aria-label="View Prachi Kumari Resume PDF">View Resume (PDF)</a>
+    </section>
+
+    <section id="contact" aria-label="Contact form">
+      <h2 class="section-title">Contact Me</h2>
+      <form id="contactForm" novalidate>
+        <label for="name">Name</label>
+        <input id="name" name="name" required aria-required="true" placeholder="Your full name" />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required aria-required="true" placeholder="your.email@example.com" />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required aria-required="true" placeholder="Write your message here" minlength="10"></textarea>
+        <button type="submit" aria-label="Send contact form">Send Message</button>
+      </form>
+      <p id="formMessage" role="alert" aria-live="polite" style="color:#059669; font-weight:700; margin-top:16px; display:none;"></p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Prachi Kumari. All rights reserved.
+  </footer>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.querySelector('.mobile-menu-button');
+  const nav = document.querySelector('nav#primary-navigation');
+  mobileMenuBtn.addEventListener('click', () => {
+    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+    nav.classList.toggle('show');
+  });
+
+  // Scroll reveal for fade-up sections
+  const fadeEls = document.querySelectorAll('.fade-up, #projects .project-card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.15});
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Contact form validation and submission simulation
+  const contactForm = document.getElementById('contactForm');
+  const formMessage = document.getElementById('formMessage');
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (!contactForm.checkValidity()) {
+      formMessage.style.color = "#dc2626"; // Red for error
+      formMessage.textContent = "Please fill out all fields correctly.";
+      formMessage.style.display = "block";
+      contactForm.reportValidity();
+      return;
+    }
+    // Fake submission delay
+    formMessage.style.color = "#059669";
+    formMessage.textContent = "Sending message...";
+    formMessage.style.display = "block";
+
+    setTimeout(() => {
+      formMessage.textContent = "Thank you for reaching out! I'll get back to you soon.";
+      contactForm.reset();
+    }, 1500);
+  });
+</script>
+</body>
+</html>
+
